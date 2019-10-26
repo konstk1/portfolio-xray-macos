@@ -1,0 +1,493 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FFE815E72364ADE00093EF28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE815E62364ADE00093EF28 /* AppDelegate.swift */; };
+		FFE815E92364ADE00093EF28 /* PortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE815E82364ADE00093EF28 /* PortfolioView.swift */; };
+		FFE815EB2364ADE00093EF28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFE815EA2364ADE00093EF28 /* Assets.xcassets */; };
+		FFE815EE2364ADE00093EF28 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFE815ED2364ADE00093EF28 /* Preview Assets.xcassets */; };
+		FFE815F12364ADE00093EF28 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFE815EF2364ADE00093EF28 /* Main.storyboard */; };
+		FFE815FD2364ADE00093EF28 /* portfolio_xray_macosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE815FC2364ADE00093EF28 /* portfolio_xray_macosTests.swift */; };
+		FFE816082364AFE20093EF28 /* MorningStar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE816072364AFE20093EF28 /* MorningStar.swift */; };
+		FFE8160A2364C8D40093EF28 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE816092364C8D40093EF28 /* Utilities.swift */; };
+		FFE8160C2364D8860093EF28 /* MorningStar+Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE8160B2364D8860093EF28 /* MorningStar+Types.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FFE815F92364ADE00093EF28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFE815DB2364ADDF0093EF28 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FFE815E22364ADDF0093EF28;
+			remoteInfo = "portfolio-xray-macos";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FFE815E32364ADE00093EF28 /* portfolio-xray-macos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "portfolio-xray-macos.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FFE815E62364ADE00093EF28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FFE815E82364ADE00093EF28 /* PortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioView.swift; sourceTree = "<group>"; };
+		FFE815EA2364ADE00093EF28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FFE815ED2364ADE00093EF28 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FFE815F02364ADE00093EF28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FFE815F22364ADE00093EF28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FFE815F32364ADE00093EF28 /* portfolio_xray_macos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = portfolio_xray_macos.entitlements; sourceTree = "<group>"; };
+		FFE815F82364ADE00093EF28 /* portfolio-xray-macosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "portfolio-xray-macosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FFE815FC2364ADE00093EF28 /* portfolio_xray_macosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = portfolio_xray_macosTests.swift; sourceTree = "<group>"; };
+		FFE815FE2364ADE00093EF28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FFE816072364AFE20093EF28 /* MorningStar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorningStar.swift; sourceTree = "<group>"; };
+		FFE816092364C8D40093EF28 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		FFE8160B2364D8860093EF28 /* MorningStar+Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MorningStar+Types.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FFE815E02364ADDF0093EF28 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FFE815F52364ADE00093EF28 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FFE815DA2364ADDF0093EF28 = {
+			isa = PBXGroup;
+			children = (
+				FFE815E52364ADE00093EF28 /* portfolio-xray-macos */,
+				FFE815FB2364ADE00093EF28 /* portfolio-xray-macosTests */,
+				FFE815E42364ADE00093EF28 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FFE815E42364ADE00093EF28 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FFE815E32364ADE00093EF28 /* portfolio-xray-macos.app */,
+				FFE815F82364ADE00093EF28 /* portfolio-xray-macosTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FFE815E52364ADE00093EF28 /* portfolio-xray-macos */ = {
+			isa = PBXGroup;
+			children = (
+				FFE815E62364ADE00093EF28 /* AppDelegate.swift */,
+				FFE815E82364ADE00093EF28 /* PortfolioView.swift */,
+				FFE816072364AFE20093EF28 /* MorningStar.swift */,
+				FFE8160B2364D8860093EF28 /* MorningStar+Types.swift */,
+				FFE816092364C8D40093EF28 /* Utilities.swift */,
+				FFE815EA2364ADE00093EF28 /* Assets.xcassets */,
+				FFE815EF2364ADE00093EF28 /* Main.storyboard */,
+				FFE815F22364ADE00093EF28 /* Info.plist */,
+				FFE815F32364ADE00093EF28 /* portfolio_xray_macos.entitlements */,
+				FFE815EC2364ADE00093EF28 /* Preview Content */,
+			);
+			path = "portfolio-xray-macos";
+			sourceTree = "<group>";
+		};
+		FFE815EC2364ADE00093EF28 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				FFE815ED2364ADE00093EF28 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		FFE815FB2364ADE00093EF28 /* portfolio-xray-macosTests */ = {
+			isa = PBXGroup;
+			children = (
+				FFE815FC2364ADE00093EF28 /* portfolio_xray_macosTests.swift */,
+				FFE815FE2364ADE00093EF28 /* Info.plist */,
+			);
+			path = "portfolio-xray-macosTests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FFE815E22364ADDF0093EF28 /* portfolio-xray-macos */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FFE816012364ADE00093EF28 /* Build configuration list for PBXNativeTarget "portfolio-xray-macos" */;
+			buildPhases = (
+				FFE815DF2364ADDF0093EF28 /* Sources */,
+				FFE815E02364ADDF0093EF28 /* Frameworks */,
+				FFE815E12364ADDF0093EF28 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "portfolio-xray-macos";
+			productName = "portfolio-xray-macos";
+			productReference = FFE815E32364ADE00093EF28 /* portfolio-xray-macos.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FFE815F72364ADE00093EF28 /* portfolio-xray-macosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FFE816042364ADE00093EF28 /* Build configuration list for PBXNativeTarget "portfolio-xray-macosTests" */;
+			buildPhases = (
+				FFE815F42364ADE00093EF28 /* Sources */,
+				FFE815F52364ADE00093EF28 /* Frameworks */,
+				FFE815F62364ADE00093EF28 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FFE815FA2364ADE00093EF28 /* PBXTargetDependency */,
+			);
+			name = "portfolio-xray-macosTests";
+			productName = "portfolio-xray-macosTests";
+			productReference = FFE815F82364ADE00093EF28 /* portfolio-xray-macosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FFE815DB2364ADDF0093EF28 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1110;
+				LastUpgradeCheck = 1110;
+				ORGANIZATIONNAME = KK;
+				TargetAttributes = {
+					FFE815E22364ADDF0093EF28 = {
+						CreatedOnToolsVersion = 11.1;
+					};
+					FFE815F72364ADE00093EF28 = {
+						CreatedOnToolsVersion = 11.1;
+						TestTargetID = FFE815E22364ADDF0093EF28;
+					};
+				};
+			};
+			buildConfigurationList = FFE815DE2364ADDF0093EF28 /* Build configuration list for PBXProject "portfolio-xray-macos" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FFE815DA2364ADDF0093EF28;
+			productRefGroup = FFE815E42364ADE00093EF28 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FFE815E22364ADDF0093EF28 /* portfolio-xray-macos */,
+				FFE815F72364ADE00093EF28 /* portfolio-xray-macosTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FFE815E12364ADDF0093EF28 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FFE815F12364ADE00093EF28 /* Main.storyboard in Resources */,
+				FFE815EE2364ADE00093EF28 /* Preview Assets.xcassets in Resources */,
+				FFE815EB2364ADE00093EF28 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FFE815F62364ADE00093EF28 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FFE815DF2364ADDF0093EF28 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FFE816082364AFE20093EF28 /* MorningStar.swift in Sources */,
+				FFE815E92364ADE00093EF28 /* PortfolioView.swift in Sources */,
+				FFE8160A2364C8D40093EF28 /* Utilities.swift in Sources */,
+				FFE815E72364ADE00093EF28 /* AppDelegate.swift in Sources */,
+				FFE8160C2364D8860093EF28 /* MorningStar+Types.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FFE815F42364ADE00093EF28 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FFE815FD2364ADE00093EF28 /* portfolio_xray_macosTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FFE815FA2364ADE00093EF28 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FFE815E22364ADDF0093EF28 /* portfolio-xray-macos */;
+			targetProxy = FFE815F92364ADE00093EF28 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FFE815EF2364ADE00093EF28 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FFE815F02364ADE00093EF28 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FFE815FF2364ADE00093EF28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FFE816002364ADE00093EF28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		FFE816022364ADE00093EF28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "portfolio-xray-macos/portfolio_xray_macos.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"portfolio-xray-macos/Preview Content\"";
+				DEVELOPMENT_TEAM = LG2FJE6R72;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "portfolio-xray-macos/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kk.portfolio-xray-macos";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		FFE816032364ADE00093EF28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "portfolio-xray-macos/portfolio_xray_macos.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"portfolio-xray-macos/Preview Content\"";
+				DEVELOPMENT_TEAM = LG2FJE6R72;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "portfolio-xray-macos/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kk.portfolio-xray-macos";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		FFE816052364ADE00093EF28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = LG2FJE6R72;
+				INFOPLIST_FILE = "portfolio-xray-macosTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kk.portfolio-xray-macosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/portfolio-xray-macos.app/Contents/MacOS/portfolio-xray-macos";
+			};
+			name = Debug;
+		};
+		FFE816062364ADE00093EF28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = LG2FJE6R72;
+				INFOPLIST_FILE = "portfolio-xray-macosTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kk.portfolio-xray-macosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/portfolio-xray-macos.app/Contents/MacOS/portfolio-xray-macos";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FFE815DE2364ADDF0093EF28 /* Build configuration list for PBXProject "portfolio-xray-macos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FFE815FF2364ADE00093EF28 /* Debug */,
+				FFE816002364ADE00093EF28 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FFE816012364ADE00093EF28 /* Build configuration list for PBXNativeTarget "portfolio-xray-macos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FFE816022364ADE00093EF28 /* Debug */,
+				FFE816032364ADE00093EF28 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FFE816042364ADE00093EF28 /* Build configuration list for PBXNativeTarget "portfolio-xray-macosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FFE816052364ADE00093EF28 /* Debug */,
+				FFE816062364ADE00093EF28 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FFE815DB2364ADDF0093EF28 /* Project object */;
+}
