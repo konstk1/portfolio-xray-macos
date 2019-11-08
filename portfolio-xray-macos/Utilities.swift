@@ -8,6 +8,8 @@
 
 import Foundation
 
+typealias Percent = Double
+
 extension URLRequest {
     init(endpoint: String, query: [String: String], headers: [String: String]) {
         var components = URLComponents(string: endpoint)!

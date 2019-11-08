@@ -7,11 +7,36 @@
 //
 
 import SwiftUI
+import Combine
 
 struct PortfolioView: View {
+    @ObservedObject private var portfolio: Portfolio = Portfolio()
+    @State private var cancelable: AnyCancellable?
+            
     var body: some View {
-        Text("Hello World")
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        VStack(alignment: .leading) {
+            HStack {
+                Text("Ticker                 ")
+                Text("US L       ")
+                Text("US M       ")
+                Text("US S     ")
+                Text("Fgn Est ")
+                Text("Fgn Emr   ")
+            }
+            VStack(alignment: .leading) {
+                ForEach(self.portfolio.funds) { fund in
+                    FundRow(fund: fund).environmentObject(self.portfolio)
+                }
+            }
+            Button("Add fund") {
+                print("Add fund")
+                self.portfolio.addFund(ticker: "")
+            }
+        }
+            .padding()
+            .onAppear() {
+            self.portfolio.addFund(ticker: "VFIAX")
+        }
     }
 }
 

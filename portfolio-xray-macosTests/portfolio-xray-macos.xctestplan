@@ -1,0 +1,35 @@
+{
+  "configurations" : [
+    {
+      "id" : "E09C595B-F121-4579-B03D-9162B4D718F3",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:portfolio-xray-macos.xcodeproj",
+      "identifier" : "FFE815E22364ADDF0093EF28",
+      "name" : "portfolio-xray-macos"
+    }
+  },
+  "testTargets" : [
+    {
+      "skippedTests" : [
+        "MorningStartTests",
+        "portfolio_xray_macosTests\/testAssetAlloc()",
+        "portfolio_xray_macosTests\/testFindFundEntity()",
+        "portfolio_xray_macosTests\/testFindSecurity()"
+      ],
+      "target" : {
+        "containerPath" : "container:portfolio-xray-macos.xcodeproj",
+        "identifier" : "FFE815F72364ADE00093EF28",
+        "name" : "portfolio-xray-macosTests"
+      }
+    }
+  ],
+  "version" : 1
+}

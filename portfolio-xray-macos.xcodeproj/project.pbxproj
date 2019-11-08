@@ -7,15 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF5B514C2374D6510052F94C /* FundRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5B514B2374D6510052F94C /* FundRow.swift */; };
 		FFE815E72364ADE00093EF28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE815E62364ADE00093EF28 /* AppDelegate.swift */; };
 		FFE815E92364ADE00093EF28 /* PortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE815E82364ADE00093EF28 /* PortfolioView.swift */; };
 		FFE815EB2364ADE00093EF28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFE815EA2364ADE00093EF28 /* Assets.xcassets */; };
 		FFE815EE2364ADE00093EF28 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFE815ED2364ADE00093EF28 /* Preview Assets.xcassets */; };
 		FFE815F12364ADE00093EF28 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFE815EF2364ADE00093EF28 /* Main.storyboard */; };
-		FFE815FD2364ADE00093EF28 /* portfolio_xray_macosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE815FC2364ADE00093EF28 /* portfolio_xray_macosTests.swift */; };
+		FFE815FD2364ADE00093EF28 /* MorningStarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE815FC2364ADE00093EF28 /* MorningStarTests.swift */; };
 		FFE816082364AFE20093EF28 /* MorningStar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE816072364AFE20093EF28 /* MorningStar.swift */; };
 		FFE8160A2364C8D40093EF28 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE816092364C8D40093EF28 /* Utilities.swift */; };
 		FFE8160C2364D8860093EF28 /* MorningStar+Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE8160B2364D8860093EF28 /* MorningStar+Types.swift */; };
+		FFE8160F236623E50093EF28 /* Fund.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE8160E236623E50093EF28 /* Fund.swift */; };
+		FFE8161123662B480093EF28 /* Portfolio.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE8161023662B480093EF28 /* Portfolio.swift */; };
+		FFE8161323662C2C0093EF28 /* PortfolioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE8161223662C2C0093EF28 /* PortfolioTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FF5B514B2374D6510052F94C /* FundRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundRow.swift; sourceTree = "<group>"; };
 		FFE815E32364ADE00093EF28 /* portfolio-xray-macos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "portfolio-xray-macos.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFE815E62364ADE00093EF28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFE815E82364ADE00093EF28 /* PortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioView.swift; sourceTree = "<group>"; };
@@ -38,11 +43,15 @@
 		FFE815F22364ADE00093EF28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFE815F32364ADE00093EF28 /* portfolio_xray_macos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = portfolio_xray_macos.entitlements; sourceTree = "<group>"; };
 		FFE815F82364ADE00093EF28 /* portfolio-xray-macosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "portfolio-xray-macosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FFE815FC2364ADE00093EF28 /* portfolio_xray_macosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = portfolio_xray_macosTests.swift; sourceTree = "<group>"; };
+		FFE815FC2364ADE00093EF28 /* MorningStarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorningStarTests.swift; sourceTree = "<group>"; };
 		FFE815FE2364ADE00093EF28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFE816072364AFE20093EF28 /* MorningStar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorningStar.swift; sourceTree = "<group>"; };
 		FFE816092364C8D40093EF28 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		FFE8160B2364D8860093EF28 /* MorningStar+Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MorningStar+Types.swift"; sourceTree = "<group>"; };
+		FFE8160D2365DE5E0093EF28 /* portfolio-xray-macos.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "portfolio-xray-macos.xctestplan"; sourceTree = "<group>"; };
+		FFE8160E236623E50093EF28 /* Fund.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fund.swift; sourceTree = "<group>"; };
+		FFE8161023662B480093EF28 /* Portfolio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Portfolio.swift; sourceTree = "<group>"; };
+		FFE8161223662C2C0093EF28 /* PortfolioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +94,10 @@
 			isa = PBXGroup;
 			children = (
 				FFE815E62364ADE00093EF28 /* AppDelegate.swift */,
+				FF5B514B2374D6510052F94C /* FundRow.swift */,
 				FFE815E82364ADE00093EF28 /* PortfolioView.swift */,
+				FFE8160E236623E50093EF28 /* Fund.swift */,
+				FFE8161023662B480093EF28 /* Portfolio.swift */,
 				FFE816072364AFE20093EF28 /* MorningStar.swift */,
 				FFE8160B2364D8860093EF28 /* MorningStar+Types.swift */,
 				FFE816092364C8D40093EF28 /* Utilities.swift */,
@@ -109,7 +121,9 @@
 		FFE815FB2364ADE00093EF28 /* portfolio-xray-macosTests */ = {
 			isa = PBXGroup;
 			children = (
-				FFE815FC2364ADE00093EF28 /* portfolio_xray_macosTests.swift */,
+				FFE8160D2365DE5E0093EF28 /* portfolio-xray-macos.xctestplan */,
+				FFE815FC2364ADE00093EF28 /* MorningStarTests.swift */,
+				FFE8161223662C2C0093EF28 /* PortfolioTests.swift */,
 				FFE815FE2364ADE00093EF28 /* Info.plist */,
 			);
 			path = "portfolio-xray-macosTests";
@@ -216,9 +230,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFE8160F236623E50093EF28 /* Fund.swift in Sources */,
 				FFE816082364AFE20093EF28 /* MorningStar.swift in Sources */,
 				FFE815E92364ADE00093EF28 /* PortfolioView.swift in Sources */,
+				FFE8161123662B480093EF28 /* Portfolio.swift in Sources */,
 				FFE8160A2364C8D40093EF28 /* Utilities.swift in Sources */,
+				FF5B514C2374D6510052F94C /* FundRow.swift in Sources */,
 				FFE815E72364ADE00093EF28 /* AppDelegate.swift in Sources */,
 				FFE8160C2364D8860093EF28 /* MorningStar+Types.swift in Sources */,
 			);
@@ -228,7 +245,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFE815FD2364ADE00093EF28 /* portfolio_xray_macosTests.swift in Sources */,
+				FFE8161323662C2C0093EF28 /* PortfolioTests.swift in Sources */,
+				FFE815FD2364ADE00093EF28 /* MorningStarTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

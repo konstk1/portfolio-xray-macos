@@ -15,121 +15,95 @@ final class MorningStar {
     let searchApiKey = "Nrc2ElgzRkaTE43D5vA7mrWj2WpSBR35fvmaqfte"
     let dataApiKey = "lstzFDEOhfFNMLikKa0am9mgEKLBl49T"
     
-    enum Endpoint: String {
-        case search = "https://www.morningstar.com/api/v1//search/entities"
-        case fundIdSearch = "https://www.morningstar.com/api/v1/securities/search?type='+sec.type+'&exchange='+sec.exchange+'&ticker='+sec.ticker"
-        case fundAssets = "https://api-global.morningstar.com/sal-service/v1/fund/process/asset/'+fundId+'/data?locale=en"
-        case fundCapInfo = "https://api-global.morningstar.com/sal-service/v1/fund/process/marketCap/'+fundId+'/data?clientId=MDC"
-        
+    func getAllocation(for ticker: String) -> AnyPublisher<AllocationMap, Error> {
+        return findEntity(ticker: ticker)
+            .flatMap { self.findSecurity(for: $0) }
+            .flatMap { self.getAssetAllocation(for: $0) }
+            .eraseToAnyPublisher()
     }
     
-    lazy var searchHeaders = {[
-      "accept-encoding": "gzip, deflate, br",
-      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36",
-      "accept": "application/json, text/plain, */*",
-      "x-api-key": searchApiKey,
-    ]}()
-    
-    lazy var dataHeaders = {[
-        "accept-encoding": "gzip, deflate, br",
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36",
-        "Accept": "application/json, text/plain, */*",
-        "ApiKey": dataApiKey,
-    ]}()
-    
-    func getAllocation(for ticker: String) -> String {
-        let fundId = getFundId(for: ticker)
-        return getAssetAllocation(for: fundId)
-        
-    }
-    
-    func getFundId(for ticker: String) -> String {
-        let sec = findEntity(ticker: ticker)
-//        return findFundId(for: sec)
-        return ""
-    }
-    
-    func findEntity(ticker: String) -> AnyPublisher<EntityResult?, Error> {
+    func findEntity(ticker: String) -> AnyPublisher<Entity, Error> {
+        print("Finding entity for \(ticker)")
         let query = [
             "q": ticker,
             "limit": "1",
             "autocomplete": "false"
         ]
     
-        var request = URLRequest(endpoint: Endpoint.search.rawValue, query: query, headers: searchHeaders)
+        let request = URLRequest(endpoint: Endpoint.entitySearch.rawValue, query: query, headers: searchHeaders)
 
         return urlSession.dataTaskPublisher(for: request)
-            .map { $0.data }
+            .map { print(String(data: $0.data, encoding: .utf8)); return $0.data }
             .decode(type: EntitySearchResponse.self, decoder: JSONDecoder())
-            .tryMap { $0.results.first }
+            .tryMap {
+                guard let result = $0.results.first else { throw MorningStarError.entityNotFound }
+                return result
+            }
             .eraseToAnyPublisher()
     }
     
-    func findSecurity(for entity: EntityResult) -> AnyPublisher<Security?, Error> {
+    func findSecurity(for entity: Entity) -> AnyPublisher<Security, Error> {
+        print("Finding security for \(entity.ticker)")
         let query = [
             "type": entity.securityType,
             "exchange": entity.exchange,
             "ticker": entity.ticker,
         ]
         
-        let request = URLRequest(endpoint: Endpoint.fundIdSearch.rawValue, query: query, headers: searchHeaders)
+        let request = URLRequest(endpoint: Endpoint.securitySearch.rawValue, query: query, headers: searchHeaders)
         
         return urlSession.dataTaskPublisher(for: request)
             .map { $0.data }
             .decode(type: [Security].self, decoder: JSONDecoder())
-            .tryMap { $0.first }
+            .tryMap {
+                guard let security = $0.first else { throw MorningStarError.entityNotFound }
+                return security
+            }
             .eraseToAnyPublisher()
     }
     
-    func getAssetAllocation(for fundId: String) -> String {
-        
-        
-//        var url = 'https://api-global.morningstar.com/sal-service/v1/fund/process/asset/'+fundId+'/data?locale=en';
-//
-//        var response = UrlFetchApp.fetch(url, options);
-//        var json = JSON.parse(response.getContentText());
-//        var map = json.allocationMap;
-//
-//        var allocation = {
-//          bonds: parseFloat(map.AssetAllocBond.netAllocation) / 100.0,
-//          cash: parseFloat(map.AssetAllocCash.netAllocation) / 100.0,
-//          usEquity: parseFloat(map.AssetAllocUSEquity.netAllocation) / 100.0,
-//          intlEquity: parseFloat(map.AssetAllocNonUSEquity.netAllocation) / 100.0,
-//          notClassified: parseFloat(map.AssetAllocNotClassified.netAllocation) / 100.0,
-//          other: parseFloat(map.AssetAllocOther.netAllocation) / 100.0,
-//        };
-//
-//        return allocation;
-        return ""
+    func findSecurity(ticker: String) -> AnyPublisher<Security, Error> {
+        return findEntity(ticker: ticker).flatMap { [unowned self] in
+                self.findSecurity(for: $0)
+            }.eraseToAnyPublisher()
     }
     
-    func getCapAllocation(for fundId: String) -> String {
-//        var url = 'https://api-global.morningstar.com/sal-service/v1/fund/process/marketCap/'+fundId+'/data?clientId=MDC';
-//        const options = {
-//          headers: {
-//            'accept-encoding': 'gzip, deflate, br',
-//            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36',
-//            'Accept': 'application/json, text/plain, */*',
-//            'ApiKey': dataApiKey,
-//          },
-//        };
-//
-//        var response = UrlFetchApp.fetch(url, options);
-//        var json = JSON.parse(response.getContentText());
-//        var fund = json.fund;
-//
-//        Logger.log(equity);
-//
-//        var equity = {
-//          large: fund.giant + fund.large,
-//          medium: fund.medium,
-//          small: fund.small + fund.micro,
-//        }
-//
-//        Logger.log(equity);
-//        return equity;
-        return ""
+    func getAssetAllocation(for security: Security) -> AnyPublisher<AllocationMap, Error> {
+        let url = Endpoint.fundAssets.rawValue.replacingOccurrences(of: "[fundId]", with: security.secId)
+        
+        let request = URLRequest(endpoint: url, query: [:], headers: dataHeaders)
+        
+        return urlSession.dataTaskPublisher(for: request)
+            .map { $0.data }
+            .decode(type: AssetsResult.self, decoder: JSONDecoder())
+            .map { $0.allocationMap }
+            .eraseToAnyPublisher()
     }
+    
+    func getCapAllocation(for security: Security) -> AnyPublisher<FundCapAlloc, Error> {
+        print("Getting cap alloc for \(security.ticker)")
+        let url = Endpoint.fundCapInfo.rawValue.replacingOccurrences(of: "[fundId]", with: security.secId)
+        
+        let request = URLRequest(endpoint: url, query: [:], headers: dataHeaders)
+        
+        return urlSession.dataTaskPublisher(for: request)
+            .map { $0.data }
+            .decode(type: MarketCapResult.self, decoder: JSONDecoder())
+            .map { $0.fund }
+            .eraseToAnyPublisher()
+    }
+    
+    func getRegionAlloc(for security: Security) -> AnyPublisher<Regions, Error> {
+            let url = Endpoint.fundRegions.rawValue.replacingOccurrences(of: "[fundId]", with: security.secId)
+            
+            let request = URLRequest(endpoint: url, query: [:], headers: dataHeaders)
+            
+            return urlSession.dataTaskPublisher(for: request)
+                .map { $0.data }
+                .decode(type: RegionAlloc.self, decoder: JSONDecoder())
+                .map { $0.fundPortfolio }
+                .eraseToAnyPublisher()
+        }
 }
 
 
