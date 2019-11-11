@@ -10,19 +10,26 @@ import SwiftUI
 import Combine
 
 struct PortfolioView: View {
-    @ObservedObject private var portfolio: Portfolio = Portfolio()
+    @EnvironmentObject private var portfolio: Portfolio
     @State private var cancelable: AnyCancellable?
             
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text("Ticker                 ")
-                Text("US L       ")
-                Text("US M       ")
-                Text("US S     ")
-                Text("Fgn Est ")
-                Text("Fgn Emr   ")
-            }
+                Group {
+                    Text("Ticker").frame(width: 65)
+                    Text("US").frame(width: 65, alignment: .trailing)
+                    Text("Foreign").frame(width: 65, alignment: .trailing)
+                    Text("Fixed").frame(width: 65, alignment: .trailing)
+                }
+                Divider()
+                Text("Large").frame(width: 65, alignment: .trailing)
+                Text("Medium").frame(width: 65, alignment: .trailing)
+                Text("Small").frame(width: 65, alignment: .trailing)
+                Divider()
+                Text("Fgn Est").frame(width: 65, alignment: .trailing)
+                Text("Fgn Emr").frame(width: 65, alignment: .trailing)
+            }.fixedSize()
             VStack(alignment: .leading) {
                 ForEach(self.portfolio.funds) { fund in
                     FundRow(fund: fund).environmentObject(self.portfolio)
@@ -34,15 +41,22 @@ struct PortfolioView: View {
             }
         }
             .padding()
-            .onAppear() {
-            self.portfolio.addFund(ticker: "VFIAX")
-        }
+//            .onAppear() {
+//            self.portfolio.addFund(ticker: "VFIAX")
+//            self.portfolio.addFund(ticker: "VTIAX")
+//        }
     }
 }
 
 
 struct PortfolioView_Previews: PreviewProvider {
     static var previews: some View {
-        PortfolioView()
+        let portfolio = Portfolio(persist: false)
+        portfolio.addFund(ticker: "VFIAX")
+        portfolio.addFund(ticker: "VTIAX")
+        
+        return PortfolioView()
+            .frame(width: 700, height: 150)
+            .environmentObject(portfolio)   
     }
 }

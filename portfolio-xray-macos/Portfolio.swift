@@ -10,11 +10,30 @@ import Foundation
 import Combine
 
 final class Portfolio: ObservableObject {
-    @Published var funds: [Fund] = []
+    @Published var funds: [Fund] = [] {
+        didSet {
+            let tickers = funds.map { $0.ticker }
+            UserDefaults.standard.set(tickers, forKey: "tickers")
+            print("Saving tickers [\(tickers)]")
+        }
+    }
     
-    let morningStar = MorningStar()
+    private var shouldPersist: Bool = false
     
-    var subs: Set<AnyCancellable> = []
+    private let morningStar = MorningStar()
+    
+    private var subs: Set<AnyCancellable> = []
+    
+    init(persist: Bool) {
+        shouldPersist = persist
+        
+        if shouldPersist {
+            if let tickers = UserDefaults.standard.stringArray(forKey: "tickers") {
+                print("Loading tickers [\(tickers)]")
+                addFunds(tickers: tickers)
+            }
+        }
+    }
     
     func addFund(ticker: String) {
         funds.append(Fund(ticker: ticker))

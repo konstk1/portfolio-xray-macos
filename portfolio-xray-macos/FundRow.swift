@@ -8,6 +8,16 @@
 
 import SwiftUI
 
+struct PercentField: View {
+    var value: Percent
+    var width: CGFloat = 65
+    
+    var body: some View {
+        Text(String(format: "\(value < 0 ? "--" : "%9.2f%%")", value))
+            .frame(width: width, alignment: .trailing)
+    }
+}
+
 struct FundRow: View {
     @EnvironmentObject var portfolio: Portfolio
     let fund: Fund
@@ -19,29 +29,36 @@ struct FundRow: View {
         HStack {
             TextField("Ticker", text: $portfolio.funds[idx].ticker, onCommit: {
                 print("Editted \(self.portfolio.funds[self.idx].ticker)")
-                if !self.portfolio.funds[self.idx].ticker.isEmpty {
-                    self.portfolio.fetchFundInfo(idx: self.idx)
-                }
-            }).frame(width: 65, alignment: .leading)
+                let ticker = self.portfolio.funds[self.idx].ticker
+                guard !ticker.isEmpty else { return }
+                
+                self.portfolio.fetchFundInfo(idx: self.idx)
+            }).frame(width: dataColumnWidth, alignment: .leading)
 
             Group {
-                Text(String(format: "%9.2f%%", fund.equityUs)).frame(width: dataColumnWidth, alignment: .trailing)
-                Text(String(format: "%9.2f%%", fund.equityForeign)).frame(width: dataColumnWidth, alignment: .trailing)
-                Text(String(format: "%9.2f%%", fund.fixedIncome)).frame(width: dataColumnWidth, alignment: .trailing)
+                PercentField(value: fund.equityUs)
+                PercentField(value: fund.equityForeign)
+                PercentField(value: fund.fixedIncome)
             }
             Divider()
-            Text(String(format: "%9.2f%%", fund.equityLarge)).frame(width: dataColumnWidth, alignment: .trailing)
-            Text(String(format: "%9.2f%%", fund.equityMedium)).frame(width: dataColumnWidth, alignment: .trailing)
-            Text(String(format: "%9.2f%%", fund.equitySmall)).frame(width: dataColumnWidth, alignment: .trailing)
+            Group {
+                PercentField(value: fund.equityLarge)
+                PercentField(value: fund.equityMedium)
+                PercentField(value: fund.equitySmall)
+            }
             Divider()
-            Text(String(format: "%9.2f%%", fund.equityForeignEstablished)).frame(width: dataColumnWidth, alignment: .trailing)
-            Text(String(format: "%9.2f%%", fund.equityForeignEmerging)).frame(width: dataColumnWidth, alignment: .trailing)
+            Group {
+                PercentField(value: fund.equityForeignEstablished)
+                PercentField(value: fund.equityForeignEmerging)
+            }
         }.fixedSize()
     }
 }
 
 struct FundRow_Previews: PreviewProvider {
     static var previews: some View {
-        FundRow(fund: Fund(ticker: "VFIAX"))
+        let portfolio = Portfolio(persist: false)
+        portfolio.addFund(ticker: "VFIAX")
+        return FundRow(fund: portfolio.funds[0]).environmentObject(portfolio)
     }
 }
