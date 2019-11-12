@@ -23,12 +23,21 @@ struct PortfolioView: View {
                     Text("Fixed").frame(width: 65, alignment: .trailing)
                 }
                 Divider()
-                Text("Large").frame(width: 65, alignment: .trailing)
-                Text("Medium").frame(width: 65, alignment: .trailing)
-                Text("Small").frame(width: 65, alignment: .trailing)
+                Group {
+                    Text("Large").frame(width: 65, alignment: .trailing)
+                    Text("Medium").frame(width: 65, alignment: .trailing)
+                    Text("Small").frame(width: 65, alignment: .trailing)
+                }
                 Divider()
-                Text("Fgn Est").frame(width: 65, alignment: .trailing)
-                Text("Fgn Emr").frame(width: 65, alignment: .trailing)
+                Group {
+                    Text("Fgn Est").frame(width: 65, alignment: .trailing)
+                    Text("Fgn Emr").frame(width: 65, alignment: .trailing)
+                }
+                Divider()
+                Group {
+                    Text("Fee").frame(width: 65, alignment: .trailing)
+                    Text("Tax Rat.").frame(width: 65, alignment: .trailing)
+                }
             }.fixedSize()
             VStack(alignment: .leading) {
                 ForEach(self.portfolio.funds) { fund in
@@ -56,7 +65,7 @@ struct PortfolioView_Previews: PreviewProvider {
         portfolio.addFund(ticker: "VTIAX")
         
         return PortfolioView()
-            .frame(width: 700, height: 150)
+            .frame(width: 870, height: 150)
             .environmentObject(portfolio)   
     }
 }

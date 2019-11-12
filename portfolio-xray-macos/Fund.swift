@@ -21,6 +21,8 @@ struct Fund: Identifiable {
             equityLarge = -1
             equityForeignEstablished = -1
             equityForeignEmerging = -1
+            fee = -1
+            trailing3YearTaxCostRatio = -1
         }
     }
     
@@ -34,5 +36,7 @@ struct Fund: Identifiable {
     var equityForeignEstablished: Percent = -1
     var equityForeignEmerging: Percent = -1
     
+    var fee: Percent = -1
+    var trailing3YearTaxCostRatio: Percent = -1
     
 }

@@ -94,16 +94,40 @@ final class MorningStar {
     }
     
     func getRegionAlloc(for security: Security) -> AnyPublisher<Regions, Error> {
-            let url = Endpoint.fundRegions.rawValue.replacingOccurrences(of: "[fundId]", with: security.secId)
-            
-            let request = URLRequest(endpoint: url, query: [:], headers: dataHeaders)
-            
-            return urlSession.dataTaskPublisher(for: request)
-                .map { $0.data }
-                .decode(type: RegionAlloc.self, decoder: JSONDecoder())
-                .map { $0.fundPortfolio }
-                .eraseToAnyPublisher()
-        }
+        let url = Endpoint.fundRegions.rawValue.replacingOccurrences(of: "[fundId]", with: security.secId)
+        
+        let request = URLRequest(endpoint: url, query: [:], headers: dataHeaders)
+        
+        return urlSession.dataTaskPublisher(for: request)
+            .map { $0.data }
+            .decode(type: RegionAlloc.self, decoder: JSONDecoder())
+            .map { $0.fundPortfolio }
+            .eraseToAnyPublisher()
+    }
+    
+    func getFees(for security: Security) -> AnyPublisher<Fees, Error> {
+        let url = Endpoint.fundFee.rawValue.replacingOccurrences(of: "[fundId]", with: security.secId)
+        
+        let request = URLRequest(endpoint: url, query: [:], headers: dataHeaders)
+        
+        return urlSession.dataTaskPublisher(for: request)
+            .map { $0.data }
+            .decode(type: Fees.self, decoder: JSONDecoder())
+//            .map { $0.fundPortfolio }
+            .eraseToAnyPublisher()
+    }
+    
+    func getTaxes(for security: Security) -> AnyPublisher<Taxes, Error> {
+        let url = Endpoint.fundTaxes.rawValue.replacingOccurrences(of: "[fundId]", with: security.secId)
+        
+        let request = URLRequest(endpoint: url, query: [:], headers: dataHeaders)
+        
+        return urlSession.dataTaskPublisher(for: request)
+            .map { $0.data }
+            .decode(type: Taxes.self, decoder: JSONDecoder())
+//            .map { $0.fundPortfolio }
+            .eraseToAnyPublisher()
+    }
 }
 
 

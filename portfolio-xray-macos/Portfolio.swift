@@ -77,6 +77,17 @@ final class Portfolio: ObservableObject {
                 self?.funds[idx].equityForeignEmerging = regions.asiaEmerging + regions.europeEmerging + regions.africaMiddleEast
                 self?.funds[idx].equityForeignEstablished = regions.europeDeveloped + regions.asiaDeveloped + regions.australasia + regions.japan + regions.latinAmerica
             }.store(in: &self.subs)
+            
+            self.morningStar.getFees(for: security).receive(on: RunLoop.main).sink(receiveCompletion: { _ in }) { [weak self] fees in
+                print("Got fees")
+                self?.funds[idx].fee = fees.fundFee
+            }.store(in: &self.subs)
+            
+            self.morningStar.getTaxes(for: security).receive(on: RunLoop.main).sink(receiveCompletion: { _ in }) { [weak self] taxes in
+                print("Got taxes")
+                self?.funds[idx].trailing3YearTaxCostRatio = taxes.trailing3YearTaxCostRatio
+            }.store(in: &self.subs)
+            
         }.store(in: &subs)
     }
 }

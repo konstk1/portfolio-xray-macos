@@ -12,9 +12,11 @@ extension MorningStar {
     enum Endpoint: String {
         case entitySearch = "https://www.morningstar.com/api/v1//search/entities"
         case securitySearch = "https://www.morningstar.com/api/v1/securities/search"
-        case fundAssets = "https://api-global.morningstar.com/sal-service/v1/fund/process/asset/[fundId]/data"
+        case fundAssets  = "https://api-global.morningstar.com/sal-service/v1/fund/process/asset/[fundId]/data"
         case fundCapInfo = "https://api-global.morningstar.com/sal-service/v1/fund/process/marketCap/[fundId]/data"
         case fundRegions = "https://api-global.morningstar.com/sal-service/v1/fund/portfolio/regionalSector/[fundId]/data"
+        case fundFee     = "https://api-global.morningstar.com/sal-service/v1/fund/price/feeLevel/[fundId]/data"
+        case fundTaxes   = "https://api-global.morningstar.com/sal-service/v1/fund/price/taxes/[fundId]/data"
     }
     
     var searchHeaders: [String: String] {[
@@ -112,6 +114,14 @@ extension MorningStar {
         let latinAmerica: Double
         let northAmerica: Double
         let unitedKingdom: Double
+    }
+    
+    struct Fees: Decodable {
+        var fundFee: Percent
+    }
+    
+    struct Taxes: Decodable {
+        var trailing3YearTaxCostRatio: Percent
     }
     
     enum MorningStarError: Error {

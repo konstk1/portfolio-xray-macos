@@ -11,7 +11,7 @@ import Combine
 @testable import portfolio_xray_macos
 
 class PortfolioTests: XCTestCase {
-    let portfolio = Portfolio()
+    let portfolio = Portfolio(persist: false)
     
     var subs: Set<AnyCancellable> = []
 

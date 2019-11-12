@@ -116,4 +116,38 @@ class MorningStartTests: XCTestCase {
         
         waitForExpectations(timeout: 5, handler: nil)
     }
+    
+    func testFees() {
+        let expect = self.expectation(description: "Fees")
+        
+        ms.getFees(for: security).sink(receiveCompletion: { error in
+            expect.fulfill()
+            guard case .finished = error else {
+                print("Error: \(error)")
+                XCTFail(); return
+            }
+        }) { fees in
+            print(fees)
+            XCTAssertEqual(fees.fundFee, 0.04)
+        }.store(in: &requests)
+        
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+    
+    func testTaxes() {
+        let expect = self.expectation(description: "Taxes")
+        
+        ms.getTaxes(for: security).sink(receiveCompletion: { error in
+            expect.fulfill()
+            guard case .finished = error else {
+                print("Error: \(error)")
+                XCTFail(); return
+            }
+        }) { taxes in
+            print(taxes)
+            XCTAssertEqual(taxes.trailing3YearTaxCostRatio, 0.55)
+        }.store(in: &requests)
+        
+        waitForExpectations(timeout: 5, handler: nil)
+    }
 }

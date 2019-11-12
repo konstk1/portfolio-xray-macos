@@ -51,6 +51,11 @@ struct FundRow: View {
                 PercentField(value: fund.equityForeignEstablished)
                 PercentField(value: fund.equityForeignEmerging)
             }
+            Divider()
+            Group {
+                PercentField(value: fund.fee)
+                PercentField(value: fund.trailing3YearTaxCostRatio)
+            }
         }.fixedSize()
     }
 }
