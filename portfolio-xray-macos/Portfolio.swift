@@ -46,6 +46,10 @@ final class Portfolio: ObservableObject {
         funds.append(contentsOf: tickers.map { Fund(ticker: $0) })
     }
     
+    func remove(fund: Fund) {
+        funds.removeAll { $0.id == fund.id }
+    }
+    
     func fetchFundInfo(idx: Int) {
         let ticker = funds[idx].ticker
         

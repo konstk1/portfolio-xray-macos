@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct PercentField: View {
     var value: Percent
@@ -20,17 +21,31 @@ struct PercentField: View {
 
 struct FundRow: View {
     @EnvironmentObject var portfolio: Portfolio
-    let fund: Fund
-    var idx: Int { portfolio.funds.firstIndex { $0.id == fund.id }! }
+    var fund: Fund
+    @State private var ticker: String = ""
     
-    let dataColumnWidth: CGFloat = 65
+    private var idx: Int { portfolio.funds.firstIndex { $0.id == fund.id }! }
+    
+    private let dataColumnWidth: CGFloat = 65
+    
+    private var sub: AnyCancellable?
+    
+    init(fund: Fund) {
+        self.fund = fund
+        _ticker = State(initialValue: fund.ticker)
+        print("Init fund '\(ticker)' '\(_ticker)' '\(fund.ticker)'")
+    }
         
     var body: some View {
         HStack {
-            TextField("Ticker", text: $portfolio.funds[idx].ticker, onCommit: {
-                print("Editted \(self.portfolio.funds[self.idx].ticker)")
-                let ticker = self.portfolio.funds[self.idx].ticker
-                guard !ticker.isEmpty else { return }
+            TextField("Ticker", text: $ticker, onCommit: {
+                print("Editted \(self.ticker)")
+                
+                guard self.ticker != self.portfolio.funds[self.idx].ticker else { return }
+
+                self.portfolio.funds[self.idx].ticker = self.ticker
+                
+                guard !self.ticker.isEmpty else { return }
                 
                 self.portfolio.fetchFundInfo(idx: self.idx)
             }).frame(width: dataColumnWidth, alignment: .leading)
@@ -56,7 +71,9 @@ struct FundRow: View {
                 PercentField(value: fund.fee)
                 PercentField(value: fund.trailing3YearTaxCostRatio)
             }
-        }.fixedSize()
+        }.fixedSize().onAppear() {
+            print("On appear \(self.ticker)")
+        }
     }
 }
 

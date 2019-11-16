@@ -17,7 +17,7 @@ struct PortfolioView: View {
         VStack(alignment: .leading) {
             HStack {
                 Group {
-                    Text("Ticker").frame(width: 65)
+                    Text("Ticker").frame(width: 65).padding(.leading, 40)
                     Text("US").frame(width: 65, alignment: .trailing)
                     Text("Foreign").frame(width: 65, alignment: .trailing)
                     Text("Fixed").frame(width: 65, alignment: .trailing)
@@ -39,11 +39,21 @@ struct PortfolioView: View {
                     Text("Tax Rat.").frame(width: 65, alignment: .trailing)
                 }
             }.fixedSize()
+            
             VStack(alignment: .leading) {
                 ForEach(self.portfolio.funds) { fund in
-                    FundRow(fund: fund).environmentObject(self.portfolio)
+                    HStack {
+                        Button(action: {
+                            print("Delete \(fund.ticker)")
+                            self.portfolio.remove(fund: fund)
+                        }) {
+                            Image(nsImage: NSImage(named: NSImage.stopProgressTemplateName)!)
+                        }.buttonStyle(BorderlessButtonStyle()).foregroundColor(.red)
+                        FundRow(fund: fund).environmentObject(self.portfolio)
+                    }
                 }
             }
+            
             Button("Add fund") {
                 print("Add fund")
                 self.portfolio.addFund(ticker: "")
