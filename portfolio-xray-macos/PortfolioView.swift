@@ -17,7 +17,7 @@ struct PortfolioView: View {
         VStack(alignment: .leading) {
             HStack {
                 Group {
-                    Text("Ticker").frame(width: 65).padding(.leading, 40)
+                    Text("Ticker").frame(width: 65).padding(.leading, 19)
                     Text("US").frame(width: 65, alignment: .trailing)
                     Text("Foreign").frame(width: 65, alignment: .trailing)
                     Text("Fixed").frame(width: 65, alignment: .trailing)

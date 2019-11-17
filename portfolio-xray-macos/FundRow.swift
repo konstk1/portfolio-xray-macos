@@ -21,34 +21,23 @@ struct PercentField: View {
 
 struct FundRow: View {
     @EnvironmentObject var portfolio: Portfolio
-    var fund: Fund
+    let fund: Fund
     @State private var ticker: String = ""
     
     private var idx: Int { portfolio.funds.firstIndex { $0.id == fund.id }! }
     
-    private let dataColumnWidth: CGFloat = 65
-    
-    private var sub: AnyCancellable?
-    
-    init(fund: Fund) {
-        self.fund = fund
-        _ticker = State(initialValue: fund.ticker)
-        print("Init fund '\(ticker)' '\(_ticker)' '\(fund.ticker)'")
-    }
-        
     var body: some View {
         HStack {
             TextField("Ticker", text: $ticker, onCommit: {
-                print("Editted \(self.ticker)")
-                
                 guard self.ticker != self.portfolio.funds[self.idx].ticker else { return }
-
+                
+                print("Updated ticker '\(self.ticker)'")
                 self.portfolio.funds[self.idx].ticker = self.ticker
                 
-                guard !self.ticker.isEmpty else { return }
-                
-                self.portfolio.fetchFundInfo(idx: self.idx)
-            }).frame(width: dataColumnWidth, alignment: .leading)
+                if !self.ticker.isEmpty {
+                    self.portfolio.fetchFundInfo(idx: self.idx)
+                }
+            }).frame(width: 65, alignment: .leading)
 
             Group {
                 PercentField(value: fund.equityUs)
@@ -71,8 +60,10 @@ struct FundRow: View {
                 PercentField(value: fund.fee)
                 PercentField(value: fund.trailing3YearTaxCostRatio)
             }
-        }.fixedSize().onAppear() {
-            print("On appear \(self.ticker)")
+        }.fixedSize()
+            .onReceive(portfolio.funds.publisher) { updatedFund in
+                guard updatedFund.id == self.fund.id else { return }
+                self.ticker = self.fund.ticker
         }
     }
 }

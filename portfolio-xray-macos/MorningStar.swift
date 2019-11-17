@@ -33,7 +33,7 @@ final class MorningStar {
         let request = URLRequest(endpoint: Endpoint.entitySearch.rawValue, query: query, headers: searchHeaders)
 
         return urlSession.dataTaskPublisher(for: request)
-            .map { print(String(data: $0.data, encoding: .utf8)); return $0.data }
+            .map { print(String(data: $0.data, encoding: .utf8)!); return $0.data }
             .decode(type: EntitySearchResponse.self, decoder: JSONDecoder())
             .tryMap {
                 guard let result = $0.results.first else { throw MorningStarError.entityNotFound }
@@ -43,7 +43,7 @@ final class MorningStar {
     }
     
     func findSecurity(for entity: Entity) -> AnyPublisher<Security, Error> {
-        print("Finding security for \(entity.ticker)")
+//        print("Finding security for \(entity.ticker)")
         let query = [
             "type": entity.securityType,
             "exchange": entity.exchange,
@@ -81,7 +81,7 @@ final class MorningStar {
     }
     
     func getCapAllocation(for security: Security) -> AnyPublisher<FundCapAlloc, Error> {
-        print("Getting cap alloc for \(security.ticker)")
+//        print("Getting cap alloc for \(security.ticker)")
         let url = Endpoint.fundCapInfo.rawValue.replacingOccurrences(of: "[fundId]", with: security.secId)
         
         let request = URLRequest(endpoint: url, query: [:], headers: dataHeaders)

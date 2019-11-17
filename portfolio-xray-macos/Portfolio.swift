@@ -10,13 +10,7 @@ import Foundation
 import Combine
 
 final class Portfolio: ObservableObject {
-    @Published var funds: [Fund] = [] {
-        didSet {
-            let tickers = funds.map { $0.ticker }
-            UserDefaults.standard.set(tickers, forKey: "tickers")
-            print("Saving tickers [\(tickers)]")
-        }
-    }
+    @Published var funds: [Fund] = []
     
     private var shouldPersist: Bool = false
     
@@ -32,7 +26,19 @@ final class Portfolio: ObservableObject {
                 print("Loading tickers [\(tickers)]")
                 addFunds(tickers: tickers)
             }
+            
+            $funds.debounce(for: 1.0, scheduler: DispatchQueue.global()).sink { [weak self] _funds in
+                self?.saveFunds()
+            }.store(in: &subs)
         }
+    }
+    
+    func saveFunds() {
+        guard shouldPersist else { return }
+        
+        let tickers = funds.map { $0.ticker }
+        UserDefaults.standard.set(tickers, forKey: "tickers")
+        print("Saving tickers [\(tickers)]")
     }
     
     func addFund(ticker: String) {
@@ -44,6 +50,9 @@ final class Portfolio: ObservableObject {
     
     func addFunds(tickers: [String]) {
         funds.append(contentsOf: tickers.map { Fund(ticker: $0) })
+        funds.enumerated().forEach { index, _ in
+            fetchFundInfo(idx: index)
+        }
     }
     
     func remove(fund: Fund) {
@@ -54,7 +63,7 @@ final class Portfolio: ObservableObject {
         let ticker = funds[idx].ticker
         
         morningStar.findSecurity(ticker: ticker).sink(receiveCompletion: { error in
-            print(error)
+            print("Status: \(error)")
         }) { [weak self] security in
             guard let self = self else { return }
             
@@ -63,35 +72,37 @@ final class Portfolio: ObservableObject {
             }
             
             self.morningStar.getAssetAllocation(for: security).receive(on: RunLoop.main).sink(receiveCompletion: { _ in }) { [weak self] assets in
-                print("Got assets")
+//                print("Got assets")
                 self?.funds[idx].equityUs = Percent(assets.AssetAllocUSEquity.netAllocation) ?? -1
                 self?.funds[idx].equityForeign = Percent(assets.AssetAllocNonUSEquity.netAllocation) ?? -1
                 self?.funds[idx].fixedIncome = Percent(assets.AssetAllocBond.netAllocation) ?? -1 
             }.store(in: &self.subs)
             
             self.morningStar.getCapAllocation(for: security).receive(on: RunLoop.main).sink(receiveCompletion: { _ in }) { [weak self] alloc in
-                print("Got alloc")
+//                print("Got alloc")
                 self?.funds[idx].equityLarge = alloc.giant + alloc.large
                 self?.funds[idx].equityMedium = alloc.medium
                 self?.funds[idx].equitySmall = alloc.small + alloc.micro
             }.store(in: &self.subs)
             
             self.morningStar.getRegionAlloc(for: security).receive(on: RunLoop.main).sink(receiveCompletion: { _ in }) { [weak self] regions in
-                print("Got regions")
+//                print("Got regions")
                 self?.funds[idx].equityForeignEmerging = regions.asiaEmerging + regions.europeEmerging + regions.africaMiddleEast
                 self?.funds[idx].equityForeignEstablished = regions.europeDeveloped + regions.asiaDeveloped + regions.australasia + regions.japan + regions.latinAmerica
             }.store(in: &self.subs)
             
             self.morningStar.getFees(for: security).receive(on: RunLoop.main).sink(receiveCompletion: { _ in }) { [weak self] fees in
-                print("Got fees")
+//                print("Got fees")
                 self?.funds[idx].fee = fees.fundFee
             }.store(in: &self.subs)
             
             self.morningStar.getTaxes(for: security).receive(on: RunLoop.main).sink(receiveCompletion: { _ in }) { [weak self] taxes in
-                print("Got taxes")
+//                print("Got taxes")
                 self?.funds[idx].trailing3YearTaxCostRatio = taxes.trailing3YearTaxCostRatio
             }.store(in: &self.subs)
             
         }.store(in: &subs)
+        
+        print("Fetching subs \(subs.count)")
     }
 }
