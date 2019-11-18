@@ -42,6 +42,22 @@ final class MorningStar {
             .eraseToAnyPublisher()
     }
     
+    func findSecurities(prefix ticker: String, region: String = "USA", limit: Int = 5) -> AnyPublisher<[Security], Error> {
+        let query = [
+            "q": ticker,
+            "region": region,
+            "limit": String(limit),
+        ]
+        
+        let request = URLRequest(endpoint: Endpoint.securitySearch.rawValue, query: query, headers: searchHeaders)
+        
+        return urlSession.dataTaskPublisher(for: request)
+            .map { $0.data }
+            .decode(type: SecuritySearchResponse.self, decoder: JSONDecoder())
+            .tryMap { $0.results }
+            .eraseToAnyPublisher()
+    }
+    
     func findSecurity(for entity: Entity) -> AnyPublisher<Security, Error> {
 //        print("Finding security for \(entity.ticker)")
         let query = [

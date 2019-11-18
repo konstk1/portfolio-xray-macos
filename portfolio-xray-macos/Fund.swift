@@ -13,6 +13,7 @@ struct Fund: Identifiable {
 
     var ticker: String {
         didSet {
+            name = ""
             equityUs = -1
             equityForeign = -1
             fixedIncome = -1
@@ -25,6 +26,8 @@ struct Fund: Identifiable {
             trailing3YearTaxCostRatio = -1
         }
     }
+    
+    var name: String = ""
     
     var equityUs: Percent = -1
     var equityForeign: Percent = -1

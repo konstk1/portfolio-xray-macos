@@ -42,7 +42,7 @@ struct PortfolioView: View {
             
             VStack(alignment: .leading) {
                 ForEach(self.portfolio.funds) { fund in
-                    HStack {
+                    HStack(alignment: .center) {
                         Button(action: {
                             print("Delete \(fund.ticker)")
                             self.portfolio.remove(fund: fund)

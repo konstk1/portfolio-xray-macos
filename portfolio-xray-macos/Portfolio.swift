@@ -62,13 +62,18 @@ final class Portfolio: ObservableObject {
     func fetchFundInfo(idx: Int) {
         let ticker = funds[idx].ticker
         
-        morningStar.findSecurity(ticker: ticker).sink(receiveCompletion: { error in
-            print("Status: \(error)")
-        }) { [weak self] security in
+        morningStar.findSecurities(prefix: ticker, limit: 1).sink(receiveCompletion: { error in
+            print("Status: \(error) \(ticker)")
+        }) { [weak self] securities in
             guard let self = self else { return }
+            
+            // ensure first result is exact match (case-insensitive)
+            guard let security = securities.first,
+                security.ticker.lowercased() == ticker.lowercased() else { return }
             
             DispatchQueue.main.async {
                 self.funds[idx].ticker = security.ticker
+                self.funds[idx].name = security.name
             }
             
             self.morningStar.getAssetAllocation(for: security).receive(on: RunLoop.main).sink(receiveCompletion: { _ in }) { [weak self] assets in

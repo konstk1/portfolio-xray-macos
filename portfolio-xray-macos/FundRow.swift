@@ -19,52 +19,89 @@ struct PercentField: View {
     }
 }
 
+class FundRowViewModel: ObservableObject {
+    var ticker: String = "" {
+        didSet {
+            cancellable?.cancel()   // cancel previous request
+            cancellable = morningStar.findSecurities(prefix: ticker).receive(on: RunLoop.main).sink(receiveCompletion: { _ in }) { [weak self] securities in
+                self?.tickerSuggestions = securities.map { $0.ticker }.joined(separator: ", ")
+            }
+                
+        }
+    }
+    
+    @Published var tickerSuggestions: String = ""
+    
+    private var morningStar = MorningStar()
+    private var cancellable: AnyCancellable?
+    
+    init(ticker: String) {
+        self.ticker = ticker
+    }
+}
+
 struct FundRow: View {
     @EnvironmentObject var portfolio: Portfolio
     let fund: Fund
-    @State private var ticker: String = ""
+    @State private var hoveringInside = false
+    
+    @ObservedObject private var fundRowModel: FundRowViewModel
     
     private var idx: Int { portfolio.funds.firstIndex { $0.id == fund.id }! }
     
+    init(fund: Fund) {
+        self.fund = fund
+        fundRowModel = FundRowViewModel(ticker: fund.ticker)
+    }
+    
     var body: some View {
-        HStack {
-            TextField("Ticker", text: $ticker, onCommit: {
-                guard self.ticker != self.portfolio.funds[self.idx].ticker else { return }
-                
-                print("Updated ticker '\(self.ticker)'")
-                self.portfolio.funds[self.idx].ticker = self.ticker
-                
-                if !self.ticker.isEmpty {
-                    self.portfolio.fetchFundInfo(idx: self.idx)
-                }
-            }).frame(width: 65, alignment: .leading)
+        VStack(alignment: .leading) {
+            if (!fundRowModel.tickerSuggestions.isEmpty) {
+                Text(fundRowModel.tickerSuggestions)
+            }
+            HStack {
+                TextField("Ticker", text: $fundRowModel.ticker, onCommit: {
+                    let ticker = self.fundRowModel.ticker
+                    guard ticker != self.portfolio.funds[self.idx].ticker else { return }
+                    
+                    print("Updated ticker '\(ticker)'")
+                    self.portfolio.funds[self.idx].ticker = ticker
+                    
+                    if !ticker.isEmpty {
+                        self.portfolio.fetchFundInfo(idx: self.idx)
+                    }
+                }).frame(width: 65, alignment: .leading)
 
-            Group {
-                PercentField(value: fund.equityUs)
-                PercentField(value: fund.equityForeign)
-                PercentField(value: fund.fixedIncome)
-            }
-            Divider()
-            Group {
-                PercentField(value: fund.equityLarge)
-                PercentField(value: fund.equityMedium)
-                PercentField(value: fund.equitySmall)
-            }
-            Divider()
-            Group {
-                PercentField(value: fund.equityForeignEstablished)
-                PercentField(value: fund.equityForeignEmerging)
-            }
-            Divider()
-            Group {
-                PercentField(value: fund.fee)
-                PercentField(value: fund.trailing3YearTaxCostRatio)
-            }
-        }.fixedSize()
-            .onReceive(portfolio.funds.publisher) { updatedFund in
-                guard updatedFund.id == self.fund.id else { return }
-                self.ticker = self.fund.ticker
-        }
+                Group {
+                    PercentField(value: fund.equityUs)
+                    PercentField(value: fund.equityForeign)
+                    PercentField(value: fund.fixedIncome)
+                }
+                Divider()
+                Group {
+                    PercentField(value: fund.equityLarge)
+                    PercentField(value: fund.equityMedium)
+                    PercentField(value: fund.equitySmall)
+                }
+                Divider()
+                Group {
+                    PercentField(value: fund.equityForeignEstablished)
+                    PercentField(value: fund.equityForeignEmerging)
+                }
+                Divider()
+                Group {
+                    PercentField(value: fund.fee)
+                    PercentField(value: fund.trailing3YearTaxCostRatio)
+                }
+            }.fixedSize()
+//            .onHover { inside in
+//                self.hoveringInside = inside
+//            }
+//
+//            if (hoveringInside) {
+//                Text(portfolio.funds[idx].name).padding(.horizontal, 4).background(Color.white)
+//            }
+        } // end ZStack
     }
 }
 

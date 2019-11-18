@@ -65,6 +65,26 @@ class MorningStartTests: XCTestCase {
         waitForExpectations(timeout: 10, handler: nil)
     }
     
+    func testSecuritySearch() {
+        let expect = self.expectation(description: "Search sec")
+        
+        self.ms.findSecurities(prefix: "VFI").sink(receiveCompletion: { error in
+            guard case .finished = error else {
+                print("Error: \(error)")
+                XCTFail(); return
+            }
+            expect.fulfill()
+        }) { securities in
+            print(securities.map { $0.ticker })
+            XCTAssertEqual(securities.count, 5)
+            XCTAssertTrue(securities.contains { $0.ticker == "VFIAX" })
+            XCTAssertTrue(securities.contains { $0.ticker == "VFIFX" })
+
+        }.store(in: &requests)
+        
+        waitForExpectations(timeout: 10, handler: nil)
+    }
+    
     func testAssetAlloc() {
         let expect = self.expectation(description: "Asset alloc")
         

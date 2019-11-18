@@ -11,7 +11,8 @@ import Foundation
 extension MorningStar {
     enum Endpoint: String {
         case entitySearch = "https://www.morningstar.com/api/v1//search/entities"
-        case securitySearch = "https://www.morningstar.com/api/v1/securities/search"
+        case securitySearch = "https://www.morningstar.com/api/v1/search/securities"
+//        case securitySearch = "https://www.morningstar.com/api/v1/securities/search"
         case fundAssets  = "https://api-global.morningstar.com/sal-service/v1/fund/process/asset/[fundId]/data"
         case fundCapInfo = "https://api-global.morningstar.com/sal-service/v1/fund/process/marketCap/[fundId]/data"
         case fundRegions = "https://api-global.morningstar.com/sal-service/v1/fund/portfolio/regionalSector/[fundId]/data"
@@ -46,6 +47,10 @@ extension MorningStar {
         let ticker: String
         let name: String
         let performanceId: String
+    }
+    
+    struct SecuritySearchResponse: Decodable {
+        let results: [Security]
     }
     
     struct Security: Decodable {
